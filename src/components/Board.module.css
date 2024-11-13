@@ -1,0 +1,18 @@
+.main {
+    display: block;
+}
+
+.grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+    width: 15em;
+}
+
+.message {
+    display: block;
+}
+
+.message h2 {
+  color: orangered;
+}

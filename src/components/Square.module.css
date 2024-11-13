@@ -1,0 +1,8 @@
+.square {
+    height: 5em;
+    width: 5em;
+}
+
+div {
+    display: flex;
+}

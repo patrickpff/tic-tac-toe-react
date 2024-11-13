@@ -1,0 +1,13 @@
+.game {
+  display: block;
+  align-items: center;
+  text-align: center;
+}
+
+.content {
+  width: 15em;
+}
+
+.new-game {
+  margin-top: 2em;
+}
