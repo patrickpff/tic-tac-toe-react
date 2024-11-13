@@ -1,4 +1,4 @@
-import React, { createRef, useImperativeHandle, useRef, useState } from 'react'
+import React, { createRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import Square from './Square'
 import styles from './Board.module.css'
 
@@ -33,19 +33,22 @@ const Board = React.forwardRef(({...props}, newGameRef) => {
         let diagonals = [[0,4,8], [2,4,6]]
         let columns = [[0,3,6], [1,4,7], [2,5,8]]
 
-        checkIndividually(rows)
-        checkIndividually(diagonals)
-        checkIndividually(columns)
+        let checkRows = checkIndividually(rows)
+        let checkDiagonals = checkIndividually(diagonals)
+        let checkColumns = checkIndividually(columns)
 
         // Check for a draw
         let getAllNull = props.grid.filter(s => s === null).length;
-        if(getAllNull == 0) {
+        console.log(checkRows, checkDiagonals, checkColumns)
+        if(getAllNull == 0 && !checkRows && !checkDiagonals && !checkColumns) {
             setMessage("It's a draw! Try again.")
         }
 
     }
 
-    const checkIndividually = (rows) => {
+    let checkIndividually = (rows) => {
+        let winner = false
+
         rows.map((value, index) => {
             if (
                 (props.grid[value[0]] == props.grid[value[1]]  && props.grid[value[1]] == props.grid[value[2]])
@@ -55,8 +58,11 @@ const Board = React.forwardRef(({...props}, newGameRef) => {
             ) {
                 setMessage("Player " + marks[props.grid[value[0]]] + " wins!")
                 setFinished(true)
+                
+                winner = true;
             }
         })
+        return winner;
     }
 
     const handleNewGame = () => {
